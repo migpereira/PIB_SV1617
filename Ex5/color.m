@@ -1,18 +1,8 @@
 function color()
 
-% Fechar todas as janelas de figuras.
 close all;
-
-% Limpar a consola.
 clc
 
-% Fechar todas as janelas de figuras.
-close all;
-
-% Limpar a consola.
-clc
-
-% Ler a imagem a partir do ficheiro.
 %filename ='bird.gif';
 %filename ='squares.gif';
 %filename ='circles.bmp';
@@ -22,6 +12,7 @@ filename ='xray.tif';
 %filename = 'eight_bw2.gif';
 %filename = 'text.tif';
 
+% Ler a imagem a partir do ficheiro.
 I = imread(filename);
 info = imfinfo(filename);
 
@@ -35,7 +26,7 @@ colormap = [255   0  0;
             11 203  1;
             15 0   204];
         
-[number_of_colors,dummy] = size(colormap);
+[number_of_colors,~] = size(colormap);
 
 
 [rows, columns] = size(I);

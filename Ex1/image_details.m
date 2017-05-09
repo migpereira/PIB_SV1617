@@ -1,9 +1,6 @@
-function image_details(img)
+function image_details(img) % Receives an array of images ( {img1, img2, ...} )
 
-% Fechar todas as janelas de figuras.
 close all;
-
-% Limpar a consola.
 clc
 
 for i=1:size(img)
@@ -25,12 +22,15 @@ for i=1:size(img)
         B = I(:,:,3);
 
         fprintf(' -Red component details \n');
-        image_detail(R,1,'Component Red');
+        image_detail(R,i,'Component Red');
         fprintf(' -Green component details \n');
-        image_detail(G,2,'Component Green');
+        image_detail(G,i+2,'Component Green');
         fprintf(' -Blue component details \n');
-        image_detail(B,3,'Component Blue');
+        image_detail(B,i+4,'Component Blue');
     else
+        if(info.BitDepth == 1)
+            I = 255 * uint8(I);
+        end
         image_detail(I,i,'Image');
     end
 end
@@ -44,19 +44,19 @@ subplot(121); imshow(I); title(t);
 subplot(122); imhist(I); title(' Histogram ' );
 impixelinfo;
 
-% Calcular o valor mínimo e valor máximo da imagem.
+% Calcular o valor mínimo, valor máximo e valor médio de intesidade da imagem.
 mi  = min(min(I));
 avg = mean(mean(I));
 mx = max(max(I));
-fprintf('Intensity: Min = %d, Max = %d, AVG = %d \n', mi, mx, avg);
+fprintf('Intensity: Min = %d, Max = %d, AVG = %0.3f\n', mi, mx, avg);
 
 %Calcular a entropia da imagem.
 e = entropy(I);
 
-fprintf('Entropy = %d \n', e);
+fprintf('Entropy = %0.3f\n', e);
 
 %Calcular medida de contraste
 cme = 20 * log10(double((mx+1)/(mi+1)));
 
-fprintf('Constrast Measure = %d \n', cme);
+fprintf('Constrast Measure = %0.3f\n', cme);
 end
