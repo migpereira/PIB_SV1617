@@ -1,10 +1,6 @@
-intensity slicing - Os critérios utilizados para o numero de intervalo de cores é a quantidade de valores difrentes de itensidade existem na imagem. Esse número de valores difrentes pode ser observado atravéz do histograma da imagem. Foi escolhido apenas 5 cores difrentes porque resolve a maioria das imagens de teste, mas para 
-as imagens de maior detalhe, deveria de se escolher um maior numero de intervalo
+intensity slicing - Os critérios utilizados para o numero de intervalo de cores é a quantidade de valores difrentes de itensidade existem na imagem. Esse número de valores difrentes pode ser observado atravéz do histograma da imagem. Foi escolhido apenas 4 cores difrentes porque resolve a maioria das imagens de teste, mas para as imagens de maior detalhe(com maiores valores difrentes de itensidade), deveria de se escolher um maior numero de intervalo ou então outra tecnica de coloração.
 
-intensity to RGB transform - Aqui não é relevante os critérios a utilizar, apenas que as componentes R G e B tenham valores difrentes entre si (para cada valor de itensidade), pois se forem iguais produz uma imagem em tons de cinzento, quando se pretende obter coloração.
+intensity to RGB transform - Os critérios para a tabela de lookup presente nesta tecnica, tem por base o histograma da figura. Consoante os niveis de cinzento, observa-se a cor correspondente e constroi-se tabelas de lookup(uma para cada cor). A tabela de lookup usada para as três funções foi baseada na imagem 'weather', dai a coloração azul para as zonas escuras, pois abrangem a parte dos oceanos.
 
-Das duas tecnicas utilizadas, é perceptivel que a itensity to RGB transform produza melhores resultados. Isto acontece porque cada valor de itensidade difrente 
-(0...255), corresponde a uma cor difrente, logo existe maior detalhe na imagem. Enquanto que para a tecnica de itensity slicing, zonas com o valor de itensidade
-próximos, vão ficar com a mesma cor, pois vão estar dentro do mesmo intervalo.
-
-Para melhor detalhe e contraste, utilizar a tecnica de itensity to RGB transform.
+Para as duas tecnicas utilizadas, o critério de escolha deverá passar pelos niveis difrentes de intensidade presentes na imagem monocromática. Para níveis elevados de valores 'difrentes' utilizar a intensity to RGB transform. Para níveis onde existe pouca disperção no histograma, utilizar a tecnica de intensity slicing.
+De qualquer forma, para qualquer uma das tecnicas, os criterios devem sempre de passar pela observação do histograma, e para o caso da segunda tecnica, também da imagem.

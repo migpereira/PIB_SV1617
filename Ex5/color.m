@@ -16,8 +16,8 @@ clc
 %filename ='bird.gif';
 %filename ='squares.gif';
 %filename ='circles.bmp';
-filename ='weather.tif';
-%filename ='xray.tif';
+%filename ='weather.tif';
+filename ='xray.tif';
 %filename ='weld.tif';
 %filename = 'eight_bw2.gif';
 %filename = 'text.tif';
@@ -30,11 +30,10 @@ if(info.BitDepth == 1)
 end
 %To add more color, just add rows to the colorMap
 %           R    G     B
-colormap = [4   199  204;
-            8   200  17;
-            231 248  12;
-            243 105  154;
-            255 17   17];
+colormap = [255   0  0;
+            223 240  2;
+            11 203  1;
+            15 0   204];
         
 [number_of_colors,dummy] = size(colormap);
 
@@ -59,8 +58,10 @@ end
             
 figure(1);
 subplot(221); imshow(I); colorbar; title(' Original ' );
-subplot(222); imshow(resImage_slice); title(' Fake Colour Slice' );
-subplot(223); imshow(resImage_rgbfunc); title(' Fake Colour RGB func' );
+subplot(222); imhist(I); title(' Histogram of Original' );
+subplot(223); imshow(resImage_slice); title(' Fake Colour Slice' );
+subplot(224); imshow(resImage_rgbfunc); title(' Fake Colour RGB func' );
+
 
 
 impixelinfo;
@@ -84,13 +85,41 @@ function [pixel_out] = get_color(pixel_in,number_of_colors,colormap,color_comp)
 end
 
 function [pixel_out] = get_r_color(pixel_in)
-   pixel_out = pixel_in * 2;
+             %   min max  value
+   lookupTable = [0  25 0
+                  26 75  62
+                  76 140 18
+                  141 160 236
+                  161 255 255];
+   pixel_out = get_from_lookup(pixel_in,lookupTable);
 end
 
 function [pixel_out] = get_g_color(pixel_in)
-    pixel_out = pixel_in / 2;
+                % min max  value
+    lookupTable = [0  25 0
+                   26 75 59
+                   76 140 90
+                   141 160 251
+                   161 255 255];
+    pixel_out = get_from_lookup(pixel_in,lookupTable);
 end
 
 function [pixel_out] = get_b_color(pixel_in)
-    pixel_out = 255 - pixel_in ;
+                 %   min max  value
+   lookupTable = [0  25 255
+                  26 75 14
+                  76 140 35
+                  141 160 37 
+                  161 255 255];
+    pixel_out = get_from_lookup(pixel_in,lookupTable);
+end
+
+function [pixel_out] = get_from_lookup(pixelIn,lookupTable)
+   [lines,dummy] = size(lookupTable);
+   for i = 1 : lines
+        if(pixelIn >= lookupTable(i,1) && pixelIn <= lookupTable(i,2))
+            pixel_out = lookupTable(i,3);
+            break;
+        end
+   end
 end
