@@ -6,7 +6,7 @@ clc
 %filename ='bird.gif';
 %filename ='squares.gif';
 %filename ='circles.bmp';
-filename ='weather.tif';
+%filename ='weather.tif';
 %filename ='xray.tif';
 %filename ='weld.tif';
 %filename = 'eight_bw2.gif';
@@ -69,10 +69,10 @@ resImage_rgbfunc = uint8(zeros(rows,columns,3));
 
 for i = 1 : rows
     for j = 1 : columns
-        idx = fix(double(I(i,j))/(256/number_of_colors))+1;
-        [resImage_slice(i,j,1)] = colormap(idx,1);
-        [resImage_slice(i,j,2)] = colormap(idx,2);
-        [resImage_slice(i,j,3)] = colormap(idx,3);
+        %idx = fix(double(I(i,j))/(256/number_of_colors))+1;
+        %[resImage_slice(i,j,1)] = colormap(idx,1);
+        %[resImage_slice(i,j,2)] = colormap(idx,2);
+        %[resImage_slice(i,j,3)] = colormap(idx,3);
        
         [resImage_rgbfunc(i,j,1)] = lookupTable_red(I(i,j)+1);
         [resImage_rgbfunc(i,j,2)] = lookupTable_green(I(i,j)+1);

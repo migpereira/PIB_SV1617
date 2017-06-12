@@ -4,12 +4,12 @@ close all;
 clc
 
 % Ler a imagem a partir do ficheiro.
-I = imread('CT1.jpg');
+%I = imread('CT1.jpg');
 %I = imread('MR1.jpg');
 %I = imread('PET1.tif');
 %I = imread('US1.tif');
 %I = imread('XRay1.tif');
-%I = imread('XRay2.tif');
+I = imread('XRay2.tif');
 
 [~,~,i] = size(I);
 
