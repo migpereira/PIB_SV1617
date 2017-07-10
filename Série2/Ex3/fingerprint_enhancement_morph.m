@@ -1,14 +1,13 @@
-function fingerprint_enhancement_morph(filename)
-    IBW = fingerprint_enhancement(filename);
-    %SE = [1 1 1;
-    %      1 1 1;
-    %      1 1 1];
-    %AUX = imcomplement(IBW);
-    resImage =  bwmorph(IBW,'thin');
-    
-    %resImage = imcomplement(resImage);
-    
-    figure(1); set(gcf,'Name', 'Binária');
-    subplot(121); imshow(IBW); title(' Imagem original' );
-    subplot(122); imshow(resImage); title(' Imagem com P.M.' );
+function thin_image = fingerprint_enhancement_morph(filename)
+
+close all;
+
+IBW = fingerprint_enhancement(filename);
+
+thin_image=~bwmorph(IBW,'thin',Inf);
+
+figure(1);
+subplot(131); imshow(imread(filename)); title(' original ' );
+subplot(132); imshow(IBW); title(' fingerprint enhancement ' );
+subplot(133); imshow(thin_image); title(' fingerprint enhancement morph ' );
 end

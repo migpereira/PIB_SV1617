@@ -4,11 +4,11 @@ close all;
 clc 
 
 % Ler a imagem a partir do ficheiro.
-%I = imread('finger1.tif');
+I = imread('finger1.tif');
 %I = imread('finger2.tif');
 %I = imread('finger3.tif');
 %I = imread('finger4.tif');
-I = imread('finger5.bmp');
+%I = imread('finger5.bmp');
 
 filter=[0 -1 -1 -1 -1 -1 0;
         -1 0 -1 -1 -1 0 -1;
