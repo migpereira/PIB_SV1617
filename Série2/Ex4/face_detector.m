@@ -19,8 +19,10 @@ function face = face_detector(originalImg, x, y)
        end
     end
     
-    if(x == 0 && y == 0) face = imcrop(finalImg,BB(1,:));
-    else face = imcrop(finalImg,[BB(1,1),BB(1,2),x, y]);
+    for i = 1:size(BB,1)
+        if(x == 0 && y == 0) face = imcrop(finalImg,BB(i,:));
+        else face = imcrop(finalImg,[BB(i,1),BB(i,2),x, y]);
+        end
     end
     
 end
