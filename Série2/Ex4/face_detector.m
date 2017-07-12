@@ -1,19 +1,26 @@
-function face = face_detector(img)
+function face = face_detector(originalImg, x, y)
     %To detect Face
     FDetect = vision.CascadeObjectDetector;
-
-    %Read the input image
-    I = imread(img);
-
+    
+    finalImg = originalImg;
+    
     %Returns Bounding Box values based on number of objects
-    BB = step(FDetect,I);
+    BB = step(FDetect,originalImg);
     
-    for i = 1:size(BB,1)
-        I = insertShape(I, 'rectangle',BB(i,:),'LineWidth',3,'Color','red');
+    %If face not found, rotate image until find the face
+    if(size(BB,1) == 0)
+       for angle = 0:25:360
+           finalImg = imrotate(originalImg,angle,'crop');
+           %imshow(finalImg);
+           BB = step(FDetect,finalImg);
+           if(size(BB,1) ~= 0) 
+               break;
+           end
+       end
     end
-    imshow(I);
     
-    for i = 1:size(BB,1)
-        face = imcrop(I,BB(i,:));
+    if(x == 0 && y == 0) face = imcrop(finalImg,BB(1,:));
+    else face = imcrop(finalImg,[BB(1,1),BB(1,2),x, y]);
     end
+    
 end
